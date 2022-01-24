@@ -32,6 +32,22 @@
             
         <% end %>
 
+        <%= render 'shared/edit_section', title: "Experience" do %>
+            <%= f.fields_for :experiences do |experience| %>
+                <%= render 'shared/input/experience', experience: experience %>
+
+                <h6 class="text-xl font-bold">Projects</h6>
+                <div class="md:border-l border-gray-300 px-8">
+                    <%= experience.fields_for :projects do |project| %>
+                    <%= render 'shared/input/project', project: project %>
+                    <% end %>
+                    <%= render 'shared/input/buttons/add', label: "+ Add Project", path: new_project_path(exp: experience.object.id) %>
+                </div>
+                <br />
+            <% end %>
+            <%= render 'shared/input/buttons/add', label: "+ Add Experience", path: "/experiences/new" %>
+        <% end %>
+
         <%= render 'shared/edit_section', title: "Education" do %>
             <%= f.fields_for :educations do |education| %>
                 <%= render 'shared/input/education', education: education %>

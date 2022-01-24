@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_22_121533) do
+ActiveRecord::Schema.define(version: 2022_01_22_134255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,8 +33,10 @@ ActiveRecord::Schema.define(version: 2022_01_22_121533) do
     t.text "description"
     t.date "start"
     t.date "end"
+    t.bigint "profile_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["profile_id"], name: "index_experiences_on_profile_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -54,7 +56,7 @@ ActiveRecord::Schema.define(version: 2022_01_22_121533) do
   create_table "projects", force: :cascade do |t|
     t.string "title"
     t.string "url"
-    t.string "tech_stack", default: [], array: true
+    t.string "tech_stack"
     t.text "description"
     t.bigint "experience_id"
     t.datetime "created_at", precision: 6, null: false
@@ -72,6 +74,7 @@ ActiveRecord::Schema.define(version: 2022_01_22_121533) do
   end
 
   add_foreign_key "educations", "profiles"
+  add_foreign_key "experiences", "profiles"
   add_foreign_key "profiles", "users"
   add_foreign_key "projects", "experiences"
 end
