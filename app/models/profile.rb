@@ -1,4 +1,9 @@
 class Profile < ApplicationRecord
+
+    has_one_attached :avatar do |attachable|
+        attachable.variant :thumb, resize_to_limit: [100, 100]
+    end
+
     has_many(:educations, dependent: :destroy)
     accepts_nested_attributes_for(:educations , reject_if: :reject_education_create, allow_destroy: true)
 
