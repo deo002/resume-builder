@@ -28,6 +28,16 @@ class TailwindInputBuilder < ActionView::Helpers::FormBuilder
         )
     end
   
+    def file_field(attribute, options={})
+        super(
+            attribute, 
+            options.reverse_merge(
+                class: "hidden",
+                id: "BtnBrowseHidden"
+            )
+        )
+    end
+
     def check_box(object_name, options={})
         super(object_name,options.reverse_merge(class: "h-6 w-6 border border-gray-300 rounded-lg ml-2"))
     end

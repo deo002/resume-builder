@@ -4,7 +4,7 @@
     <%= form_for(@profile, builder: TailwindInputBuilder) do |f| %>
         <div class="flex justify-end items-center w-full mb-4">
             <div>
-                <%= render 'shared/input/buttons/secondary', color: "purple", label: "Copy Link", href: edit_url %>
+                <%= render 'shared/input/buttons/secondary', color: "purple", label: "Copy Link", href: root_path %>
                 <%= render 'shared/input/buttons/secondary', color: "purple", label: "Preview", href: profile_path(:id => @profile.id), target: "_blank" %>
                 <%= f.submit "Save", class: "flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-green-600 rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-green-200" %><br/>
             </div>
@@ -14,7 +14,7 @@
             <%= f.text_field :name, value: @profile.name || current_user.name, placeholder: "Name" %><br/>
             <div class="flex items-center my-4">
                 <%= f.file_field :avatar %>
-
+                    <label for="BtnBrowseHidden" class= "mr-4 flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-green-600 rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-green-200" >Upload Avatar</label>
                 <% if @profile.avatar.blank? %>
                     <%= image_tag gravatar_url_for(current_user), 
                         id: "image-preview", style:"max-width:200px"
